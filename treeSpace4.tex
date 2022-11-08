@@ -1,4 +1,7 @@
 \documentclass[tikz,border=5]{standalone}
+
+\usetikzlibrary{snakes}
+
 \begin{document}
 
 \tikzset{
@@ -172,34 +175,50 @@
 
 \pic[scale=0.5] at (p17) {combLeft=A/B/D/C};
 
-\draw[red] (adbc) to node[auto] {1} (abdc) to node[auto] {2} (abcd) to node[auto] {1} (acbd) to node[auto] {2} (acdb) to node[auto] {1} (adcb) to node[auto] {2} (adbc);
-\draw[green] (adcb) to node[auto] {1} (cdab) to node[auto] {2} (cdba) to node[auto] {1} (bdca) to node[auto] {2} (bdac) to node[auto] {1} (adbc);
-\draw[blue] (bdca) to node[auto] {1} (bcda) to node[auto] {2} (bcad) to node[auto] {1} (abcd);
-\draw[blue] (bdac) to node[auto] {1} (abdc);
+\draw[red] (adbc) to node[white,auto] {1} (abdc);
+\draw[red,double] (abdc) to node[white,auto] {2} (abcd);
+\draw[red] (abcd) to node[white,auto] {1} (acbd);
+\draw[red,double] (acbd) to node[white,auto] {2} (acdb);
+\draw[red] (acdb) to node[white,auto] {1} (adcb);
+\draw[red,double] (adcb) to node[white,auto] {2} (adbc);
+
+\draw[green] (adcb) to node[white,auto] {1} (cdab);
+\draw[green,double] (cdab) to node[white,auto] {2} (cdba);
+\draw[green] (cdba) to node[white,auto] {1} (bdca);
+\draw[green,double] (bdca) to node[white,auto] {2} (bdac);
+\draw[green] (bdac) to node[white,auto] {1} (adbc);
+
+\draw[blue] (bdca) to node[white,auto] {1} (bcda);
+\draw[blue,double] (bcda) to node[white,auto] {2} (bcad);
+\draw[blue] (bcad) to node[white,auto] {1} (abcd);
+\draw[blue] (bdac) to node[white,auto] {1} (abdc);
 
 \draw[orange] (cdab) to [bend right=45] node[auto,swap] {1} (acdb);
-\draw[orange] (bcad) to [bend left=45] node[auto] {1} (acbd);
+\draw[orange] (bcad) to [bend left=45] node[white,auto] {1} (acbd);
 
-\draw[orange] (cdba) to [bend left=45] node[auto] {1} (bcda);
+\draw[orange] (cdba) to [bend left=45] node[white,auto] {1} (bcda);
 
-\draw (cdab) to node[auto] {2} (cd1ab) to node[auto] {2} (cdba);
+\draw[double] (cdab) to node[white,auto] {2} (cd1ab) to node[white,auto] {2} (cdba);
 
-\draw (bcda) to node[auto] {2} (bc1ad) to node[auto] {2} (bcad);
+\draw[double] (bcda) to node[white,auto] {2} (bc1ad) to node[white,auto] {2} (bcad);
 
-\draw (acbd) to node[auto] {2} (ac1bd) to node[auto] {2} (acdb);
+\draw[double] (acbd) to node[white,auto] {2} (ac1bd) to node[white,auto] {2} (acdb);
 
-\draw (abcd) to node[auto] {2} (ab1cd) to node[auto] {2} (abdc);
+\draw[double] (abcd) to node[white,auto] {2} (ab1cd) to node[white,auto] {2} (abdc);
 
-\draw (bdac) to node[auto] {2} (bd1ac) to node[auto] {2} (bdca);
+\draw[double] (bdac) to node[white,auto] {2} (bd1ac) to node[white,auto] {2} (bdca);
 
-\draw (adbc) to node[auto] {2} (ad1bc) to node[auto] {2} (adcb);
+\draw[double] (adbc) to node[white,auto] {2} (ad1bc) to node[white,auto] {2} (adcb);
+
+  \tikzset{decoration={snake,amplitude=.3mm,segment length=2mm,
+                       post length=0mm,pre length=0mm}}
 
 %% curved rank swapping lines
-\draw[dashed,gray] (ab1cd) to[in=245, out=108] (cd1ab);
+\draw[decorate,gray] (ab1cd) to[in=245, out=108] (cd1ab);
 
-\draw[dashed,gray] (bd1ac.south) to[in=15,out=225] (ac1bd);
+\draw[decorate,gray] (bd1ac.south) to[in=15,out=225] (ac1bd);
 
-\draw[dashed,gray] (ad1bc.east) to[in=135,out=0] (bc1ad);
+\draw[decorate,gray] (ad1bc.east) to[in=135,out=0] (bc1ad);
 
 
 
