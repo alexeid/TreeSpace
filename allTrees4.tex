@@ -1,0 +1,152 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=20mm,
+ top=20mm,
+ }
+
+\usepackage{tikz}
+
+\usetikzlibrary{snakes}
+
+
+\begin{document}
+
+\title{}
+\author{}
+\date{}
+\maketitle
+
+\tikzset{
+  pics/combLeft/.style args={#1/#2/#3/#4}{
+        code={
+\node at (1.5,3) (root) {};
+
+\node at (0,0) (A) {#1};
+\node at (1,0) (B) {#2};
+\node at (2,0) (C) {#3};
+\node at (3,0) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.333] (x) coordinate[pos=0.667] (y) (root.center);
+\draw (root.center) to (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+  }}
+}
+
+\tikzset{
+  pics/combRight/.style args={#1/#2/#3/#4}{
+        code={
+\node at (1.5,3) (root) {};
+
+\node at (0,0) (A) {#1};
+\node at (1,0) (B) {#2};
+\node at (2,0) (C) {#3};
+\node at (3,0) (D) {#4};
+
+\draw (A.north) to (root.center);
+\draw (root.center) to coordinate[pos=0.333] (x) coordinate[pos=0.667] (y) (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+  }}
+}
+
+
+\tikzset{
+  pics/balancedLeft/.style args={#1/#2/#3/#4}{
+        code={
+\node at (1.5,3) (root) {};
+\node at (0,0) (A) {#1};
+\node at (1,0) (B) {#2};
+\node at (2,0) (C) {#3};
+\node at (3,0) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.333] (x) (root.center);
+\draw (root.center) to coordinate[pos=0.333] (y) (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+  }
+}}
+
+\tikzset{
+  pics/balancedRight/.style args={#1/#2/#3/#4}{
+        code={
+\node at (1.5,3) (root) {};
+\node at (0,0) (A) {#1};
+\node at (1,0) (B) {#2};
+\node at (2,0) (C) {#3};
+\node at (3,0) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.667] (x) (root.center);
+\draw (root.center) to coordinate[pos=0.667] (y) (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+  }
+}}
+
+
+\begin{tikzpicture}[line width=0.25mm]
+
+\pic[scale=0.5, local bounding box=bdac] at (0,-1.5) {combLeft=B/D/A/C};
+\pic[scale=0.5, local bounding box=adbc] at (-1.75,-4) {combLeft=A/D/B/C};
+\pic[scale=0.5, local bounding box=abdc] at (1.75,-4) {combLeft=A/B/D/C};
+\pic[scale=0.5, local bounding box=bdca] at (0,2) {combLeft=B/D/C/A};
+\pic[scale=0.5, local bounding box=abcd] at (4,-6.33) {combLeft=A/B/C/D};
+\pic[scale=0.5, local bounding box=adcb] at (-4,-6.33) {combLeft=A/D/C/B};
+\pic[scale=0.5, local bounding box=acdb] at (-2,-9.5) {combLeft=A/C/D/B};
+\pic[scale=0.5, local bounding box=acbd] at (2,-9.5) {combLeft=A/C/B/D};
+
+\pic[scale=0.5, local bounding box=cdab] at (-6,-3) {combLeft=C/D/A/B};
+
+\pic[scale=0.5, local bounding box=cdba] at (-3.5,1) {combLeft=C/D/B/A};
+\pic[scale=0.5, local bounding box=bcda] at (3.5,1) {combLeft=B/C/D/A};
+
+\pic[scale=0.5, local bounding box=bcad] at (6,-3) {combLeft=B/C/A/D};
+
+\pic[scale=0.5, local bounding box=cd1ab] at (-7,0) {balancedLeft=C/D/A/B};
+\pic[scale=0.5, local bounding box=bc1ad] at (7,0) {balancedLeft=B/C/A/D};
+\pic[scale=0.5, local bounding box=ac1bd] at (0,-12) {balancedLeft=A/C/B/D};
+
+\pic[scale=0.5, local bounding box=ab1cd] at (0,-6.66) {balancedLeft=A/B/C/D};
+\pic[scale=0.5, local bounding box=ad1bc] at (-3.33,-1.5) {balancedLeft=A/D/B/C};
+\pic[scale=0.5, local bounding box=bd1ac] at (3.66,-2) {balancedLeft=B/D/A/C};
+
+\draw[dashed,gray] (ab1cd) to [bend left=12] (cd1ab);
+
+\draw[dashed,gray] (bd1ac) to [bend left=5] (ac1bd);
+
+\draw[dashed,gray] (ad1bc) to [bend left=10] (bc1ad);
+
+
+\draw[red] (adbc) to node[auto] {2} (abdc) to node[auto] {1} (abcd) to node[auto] {2} (acbd) to node[auto] {1} (acdb) to node[auto] {2} (adcb) to node[auto] {1} (adbc);
+\draw[green] (adcb) to node[auto] {2} (cdab) to node[auto] {1} (cdba) to node[auto] {2} (bdca) to node[auto] {1} (bdac) to node[auto] {2} (adbc);
+\draw[blue] (bdca) to node[auto] {2} (bcda) to node[auto] {1} (bcad) to node[auto] {2} (abcd);
+\draw[blue] (bdac) to node[auto] {2} (abdc);
+
+\draw[orange] (cdab) to [bend right=45] node[auto,swap] {2} (acdb);
+\draw[orange] (bcad) to [bend left=45] node[auto] {2} (acbd);
+
+\draw[orange] (cdba.north) to [bend left=75] node[auto] {2} (bcda.north);
+
+\draw (cdab) -- (cd1ab) -- (cdba);
+
+\draw (bcda) -- (bc1ad) -- (bcad);
+
+\draw (acbd) -- (ac1bd) -- (acdb);
+
+\draw (abcd) -- (ab1cd) -- (abdc);
+
+\draw (bdac) -- (bd1ac) -- (bdca);
+
+\draw (adbc) -- (ad1bc) -- (adcb);
+
+
+\end{tikzpicture}
+
+
+\end{document}
