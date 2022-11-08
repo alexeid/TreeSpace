@@ -1,0 +1,210 @@
+\documentclass[tikz,border=5]{standalone}
+\begin{document}
+
+\tikzset{
+  pics/combLeft/.style args={#1/#2/#3/#4}{
+        code={
+
+%\draw[black,fill=white] (0,0) circle (2.25);
+
+\def\d{0.5}
+
+\node at (0,1.5+\d) (root) {};
+
+\node at (-1.5,-1.5+\d) (A) {#1};
+\node at (-0.5,-1.5+\d) (B) {#2};
+\node at (0.5,-1.5+\d) (C) {#3};
+\node at (1.5,-1.5+\d) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.333] (x) coordinate[pos=0.667] (y) (root.center);
+\draw (root.center) to (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+
+  }}
+}
+
+\tikzset{
+  pics/combRight/.style args={#1/#2/#3/#4}{
+        code={
+\node at (0,1.5) (root) {};
+
+\node at (-1.5,-1.5) (A) {#1};
+\node at (-0.5,-1.5) (B) {#2};
+\node at (0.5,-1.5) (C) {#3};
+\node at (1.5,-1.5) (D) {#4};
+
+\draw (A.north) to (root.center);
+\draw (root.center) to coordinate[pos=0.333] (x) coordinate[pos=0.667] (y) (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+  }}
+}
+
+
+\tikzset{
+  pics/balancedLeft/.style args={#1/#2/#3/#4}{
+        code={
+%\draw[black,fill=white] (0,0) circle (2.25);
+
+\def\d{0.5}
+
+\node at (0,1.5+\d) (root) {};
+
+\node at (-1.5,-1.5+\d) (A) {#1};
+\node at (-0.5,-1.5+\d) (B) {#2};
+\node at (0.5,-1.5+\d) (C) {#3};
+\node at (1.5,-1.5+\d) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.333] (x) (root.center);
+\draw (root.center) to coordinate[pos=0.333] (y) (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+  }
+}}
+
+\tikzset{
+  pics/balancedRight/.style args={#1/#2/#3/#4}{
+        code={
+\node at (0,1.5) (root) {};
+
+\node at (-1.5,-1.5) (A) {#1};
+\node at (-0.5,-1.5) (B) {#2};
+\node at (0.5,-1.5) (C) {#3};
+\node at (1.5,-1.5) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.667] (x) (root.center);
+\draw (root.center) to coordinate[pos=0.667] (y) (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+  }
+}}
+
+
+\begin{tikzpicture}[thick]
+
+\def\ir{6}
+\def\r{15}
+
+\coordinate (p0) at (\r/2,0);
+
+%\draw[gray,dashed] (p0) arc[start angle=0, end angle=60, radius=\r];
+
+\path (p0) arc[start angle=0, end angle=15, radius=\r] node[inner sep=0] (p1) {};
+\path (p0) arc[start angle=0, end angle=30, radius=\r] node[inner sep=0] (p2) {};
+\path (p0) arc[start angle=0, end angle=45, radius=\r] node[inner sep=0] (p3) {};
+\path (p0) arc[start angle=0, end angle=60, radius=\r] node[inner sep=0] (p4) {};
+
+%\draw[gray,dashed] [rotate=120] (p4) arc[start angle=0, end angle=60, radius=\r];
+
+\path [rotate=120] (p4) arc[start angle=0, end angle=15, radius=\r] node[inner sep=0] (p5) {};
+\path [rotate=120] (p4) arc[start angle=0, end angle=30, radius=\r] node[inner sep=0] (p6) {};
+\path [rotate=120] (p4) arc[start angle=0, end angle=45, radius=\r] node[inner sep=0] (p7) {};
+\path [rotate=120] (p4) arc[start angle=0, end angle=60, radius=\r] node[inner sep=0] (p8) {};
+
+%\draw[gray,dashed] [rotate=240] (p8) arc[start angle=0, end angle=60, radius=\r];
+
+\path [rotate=240] (p8) arc[start angle=0, end angle=15, radius=\r] node[inner sep=0] (p9) {};
+\path [rotate=240] (p8) arc[start angle=0, end angle=30, radius=\r] node[inner sep=0] (p10) {};
+\path [rotate=240] (p8) arc[start angle=0, end angle=45, radius=\r] node[inner sep=0] (p11) {};
+
+% fix this coordinate, the 4 is (\r-\ir)/2
+\coordinate (p12) at (\r/2-4.5,\r/4/sqrt 2);
+
+%\draw[red] (p12) arc[start angle=0, end angle=60, radius=\ir];
+
+\path (p12) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p13) {};
+\path (p12) arc[start angle=0, end angle=60, radius=\ir] node[inner sep=0] (p14) {};
+
+%\draw[red] [rotate=120] (p14) arc[start angle=0, end angle=60, radius=\ir];
+
+\path [rotate=120] (p14) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p15) {};
+\path [rotate=120] (p14) arc[start angle=0, end angle=60, radius=\ir] node[inner sep=0] (p16) {};
+
+%\draw[red] [rotate=240] (p16) arc[start angle=0, end angle=60, radius=\ir];
+
+\path [rotate=240] (p16) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p17) {};
+
+\def\ns{2.25}
+
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bc1ad) at (p0) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bcda) at (p1) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bdca) at (p2) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (cdba) at (p3) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (cd1ab) at (p4) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (cdab) at (p5) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (adcb) at (p6) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (acdb) at (p7) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (ac1bd) at (p8) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (acbd) at (p9) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (abcd) at (p10) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bcad) at (p11) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bd1ac) at (p12) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bdac) at (p13) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (ad1bc) at (p14) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (adbc) at (p15) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (ab1cd) at (p16) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (abdc) at (p17) {};
+
+\pic[scale=0.5] at (p0) {balancedLeft=B/C/A/D};
+\pic[scale=0.5] at (p1) {combLeft=B/C/D/A};
+\pic[scale=0.5] at (p2) {combLeft=B/D/C/A};
+\pic[scale=0.5] at (p3) {combLeft=C/D/B/A};
+\pic[scale=0.5] at (p4) {balancedLeft=C/D/A/B};
+\pic[scale=0.5] at (p5) {combLeft=C/D/A/B};
+\pic[scale=0.5] at (p6) {combLeft=A/D/C/B};
+\pic[scale=0.5] at (p7) {combLeft=A/C/D/B};
+\pic[scale=0.5] at (p8) {balancedLeft=A/C/B/D};
+\pic[scale=0.5] at (p9) {combLeft=A/C/B/D};
+\pic[scale=0.5] at (p10) {combLeft=A/B/C/D};
+\pic[scale=0.5] at (p11) {combLeft=B/C/A/D};
+
+\pic[scale=0.5] at (p12) {balancedLeft=B/D/A/C};
+\pic[scale=0.5] at (p13) {combLeft=B/D/A/C};
+\pic[scale=0.5] at (p14) {balancedLeft=A/D/B/C};
+\pic[scale=0.5] at (p15) {combLeft=A/D/B/C};
+\pic[scale=0.5] at (p16) {balancedLeft=A/B/C/D};
+
+
+\pic[scale=0.5] at (p17) {combLeft=A/B/D/C};
+
+\draw[red] (adbc) to node[auto] {1} (abdc) to node[auto] {2} (abcd) to node[auto] {1} (acbd) to node[auto] {2} (acdb) to node[auto] {1} (adcb) to node[auto] {2} (adbc);
+\draw[green] (adcb) to node[auto] {1} (cdab) to node[auto] {2} (cdba) to node[auto] {1} (bdca) to node[auto] {2} (bdac) to node[auto] {1} (adbc);
+\draw[blue] (bdca) to node[auto] {1} (bcda) to node[auto] {2} (bcad) to node[auto] {1} (abcd);
+\draw[blue] (bdac) to node[auto] {1} (abdc);
+
+\draw[orange] (cdab) to [bend right=45] node[auto,swap] {1} (acdb);
+\draw[orange] (bcad) to [bend left=45] node[auto] {1} (acbd);
+
+\draw[orange] (cdba) to [bend left=45] node[auto] {1} (bcda);
+
+\draw (cdab) to node[auto] {2} (cd1ab) to node[auto] {2} (cdba);
+
+\draw (bcda) to node[auto] {2} (bc1ad) to node[auto] {2} (bcad);
+
+\draw (acbd) to node[auto] {2} (ac1bd) to node[auto] {2} (acdb);
+
+\draw (abcd) to node[auto] {2} (ab1cd) to node[auto] {2} (abdc);
+
+\draw (bdac) to node[auto] {2} (bd1ac) to node[auto] {2} (bdca);
+
+\draw (adbc) to node[auto] {2} (ad1bc) to node[auto] {2} (adcb);
+
+%% curved rank swapping lines
+\draw[dashed,gray] (ab1cd) to[in=245, out=108] (cd1ab);
+
+\draw[dashed,gray] (bd1ac.south) to[in=15,out=225] (ac1bd);
+
+\draw[dashed,gray] (ad1bc.east) to[in=135,out=0] (bc1ad);
+
+
+
+\draw[blue] ;
+
+\end{tikzpicture}
+
+\end{document}
