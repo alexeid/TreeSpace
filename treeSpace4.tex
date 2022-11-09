@@ -90,7 +90,7 @@
 
 \begin{tikzpicture}[thick]
 
-\def\ir{6}
+\def\ir{7.5}
 \def\r{15}
 
 \coordinate (p0) at (\r/2,0);
@@ -116,23 +116,38 @@
 \path [rotate=240] (p8) arc[start angle=0, end angle=45, radius=\r] node[inner sep=0] (p11) {};
 
 % fix this coordinate, the 4 is (\r-\ir)/2
-\coordinate (p12) at (\r/2-4.5,\r/4/sqrt 2);
+\coordinate (p12) at (\r/2-3.75,\r/4/sqrt 2);
 
-%\draw[red] (p12) arc[start angle=0, end angle=60, radius=\ir];
+%\draw[gray] (p12) arc[start angle=0, end angle=60, radius=\ir];
 
-\path (p12) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p13) {};
+%\path (p12) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p13) {};
+
+
+
 \path (p12) arc[start angle=0, end angle=60, radius=\ir] node[inner sep=0] (p14) {};
 
-%\draw[red] [rotate=120] (p14) arc[start angle=0, end angle=60, radius=\ir];
+%\draw[gray] [rotate=120] (p14) arc[start angle=0, end angle=60, radius=\ir];
 
-\path [rotate=120] (p14) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p15) {};
+%\path [rotate=120] (p14) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p15) {};
+
 \path [rotate=120] (p14) arc[start angle=0, end angle=60, radius=\ir] node[inner sep=0] (p16) {};
 
-%\draw[red] [rotate=240] (p16) arc[start angle=0, end angle=60, radius=\ir];
 
-\path [rotate=240] (p16) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p17) {};
+%\draw[gray] [rotate=240] (p16) arc[start angle=0, end angle=60, radius=\ir];
+
+%\path [rotate=240] (p16) arc[start angle=0, end angle=30, radius=\ir] node[inner sep=0] (p17) {};
+
+
+\node (p13) at (barycentric cs:p12=0.5,p14=0.5) {};
+\node (p15) at (barycentric cs:p14=0.5,p16=0.5) {};
+\node (p17) at (barycentric cs:p16=0.5,p12=0.5) {};
 
 \def\ns{2.25}
+
+%\draw [fill=red, opacity=0.1] (p6.center) -- (p7.center) -- (p9.center) -- (p10.center) -- (p17.center) -- (p15.center) -- (p6.center);
+%\draw [fill=blue, opacity=0.1] (p1.center) -- (p2.center) -- (p13.center) -- (p17.center) -- (p10.center) -- (p11.center) -- (p1.center);
+%\draw [fill=green, opacity=0.1] (p2.center) -- (p3.center) -- (p5.center) -- (p6.center) -- (p15.center) -- (p13.center) -- (p2.center);
+
 
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bc1ad) at (p0) {};
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bcda) at (p1) {};
@@ -152,6 +167,8 @@
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (adbc) at (p15) {};
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (ab1cd) at (p16) {};
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (abdc) at (p17) {};
+
+
 
 \pic[scale=0.5] at (p0) {balancedLeft=B/C/A/D};
 \pic[scale=0.5] at (p1) {combLeft=B/C/D/A};
@@ -175,50 +192,54 @@
 
 \pic[scale=0.5] at (p17) {combLeft=A/B/D/C};
 
-\draw[red] (adbc) to node[white,auto] {1} (abdc);
-\draw[red,double] (abdc) to node[white,auto] {2} (abcd);
-\draw[red] (abcd) to node[white,auto] {1} (acbd);
-\draw[red,double] (acbd) to node[white,auto] {2} (acdb);
-\draw[red] (acdb) to node[white,auto] {1} (adcb);
-\draw[red,double] (adcb) to node[white,auto] {2} (adbc);
+% RED EDGES
+\draw[black] (adbc) to node[opacity=0.0,auto] {1} (abdc);
+\draw[black,double] (abdc) to node[opacity=0.0,auto] {2} (abcd);
+\draw[black] (abcd) to node[opacity=0.0,auto] {1} (acbd);
+\draw[black,double] (acbd) to node[opacity=0.0,auto] {2} (acdb);
+\draw[black] (acdb) to node[opacity=0.0,auto] {1} (adcb);
+\draw[black,double] (adcb) to node[opacity=0.0,auto] {2} (adbc);
 
-\draw[green] (adcb) to node[white,auto] {1} (cdab);
-\draw[green,double] (cdab) to node[white,auto] {2} (cdba);
-\draw[green] (cdba) to node[white,auto] {1} (bdca);
-\draw[green,double] (bdca) to node[white,auto] {2} (bdac);
-\draw[green] (bdac) to node[white,auto] {1} (adbc);
+% GREEN EDGES
+\draw[black] (adcb) to node[opacity=0.0,auto] {1} (cdab);
+\draw[black,double] (cdab) to node[opacity=0.0,auto] {2} (cdba);
+\draw[black] (cdba) to node[opacity=0.0,auto] {1} (bdca);
+\draw[black,double] (bdca) to node[opacity=0.0,auto] {2} (bdac);
+\draw[black] (bdac) to node[opacity=0.0,auto] {1} (adbc);
 
-\draw[blue] (bdca) to node[white,auto] {1} (bcda);
-\draw[blue,double] (bcda) to node[white,auto] {2} (bcad);
-\draw[blue] (bcad) to node[white,auto] {1} (abcd);
-\draw[blue] (bdac) to node[white,auto] {1} (abdc);
+%BLUE EDGES
+\draw[black] (bdca) to node[opacity=0.0,auto] {1} (bcda);
+\draw[black,double] (bcda) to node[opacity=0.0,auto] {2} (bcad);
+\draw[black] (bcad) to node[opacity=0.0,auto] {1} (abcd);
+\draw[black] (bdac) to node[opacity=0.0,auto] {1} (abdc);
 
-\draw[orange] (cdab) to [bend right=45] node[auto,swap] {1} (acdb);
-\draw[orange] (bcad) to [bend left=45] node[white,auto] {1} (acbd);
+% ORANGE EDGES
+\draw[black] (cdab) to [bend right=45] node[opacity=0.0,auto,swap] {1} (acdb);
+\draw[black] (bcad) to [bend left=45] node[opacity=0.0,auto] {1} (acbd);
+\draw[black] (cdba) to [bend left=45] node[opacity=0.0,auto] {1} (bcda);
 
-\draw[orange] (cdba) to [bend left=45] node[white,auto] {1} (bcda);
 
-\draw[double] (cdab) to node[white,auto] {2} (cd1ab) to node[white,auto] {2} (cdba);
+\draw[double] (cdab) to node[opacity=0.0,auto] {2} (cd1ab) to node[opacity=0.0,auto] {2} (cdba);
 
-\draw[double] (bcda) to node[white,auto] {2} (bc1ad) to node[white,auto] {2} (bcad);
+\draw[double] (bcda) to node[opacity=0.0,auto] {2} (bc1ad) to node[opacity=0.0,auto] {2} (bcad);
 
-\draw[double] (acbd) to node[white,auto] {2} (ac1bd) to node[white,auto] {2} (acdb);
+\draw[double] (acbd) to node[opacity=0.0,auto] {2} (ac1bd) to node[opacity=0.0,auto] {2} (acdb);
 
-\draw[double] (abcd) to node[white,auto] {2} (ab1cd) to node[white,auto] {2} (abdc);
+\draw[double] (abcd) to node[opacity=0.0,auto] {2} (ab1cd) to node[opacity=0.0,auto] {2} (abdc);
 
-\draw[double] (bdac) to node[white,auto] {2} (bd1ac) to node[white,auto] {2} (bdca);
+\draw[double] (bdac) to node[opacity=0.0,auto] {2} (bd1ac) to node[opacity=0.0,auto] {2} (bdca);
 
-\draw[double] (adbc) to node[white,auto] {2} (ad1bc) to node[white,auto] {2} (adcb);
+\draw[double] (adbc) to node[opacity=0.0,auto] {2} (ad1bc) to node[opacity=0.0,auto] {2} (adcb);
 
   \tikzset{decoration={snake,amplitude=.3mm,segment length=2mm,
                        post length=0mm,pre length=0mm}}
 
 %% curved rank swapping lines
-\draw[decorate,gray] (ab1cd) to[in=245, out=108] (cd1ab);
+\draw[decorate,black] (ab1cd) to[in=245, out=100] (cd1ab);
 
-\draw[decorate,gray] (bd1ac.south) to[in=15,out=225] (ac1bd);
+\draw[decorate,black] (bd1ac) to[in=10,out=225] (ac1bd);
 
-\draw[decorate,gray] (ad1bc.east) to[in=135,out=0] (bc1ad);
+\draw[decorate,black] (ad1bc) to[in=125,out=330] (bc1ad);
 
 
 
