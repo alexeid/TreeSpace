@@ -48,11 +48,16 @@ shells are smaller, but 3 is still the maximum distance:
 
 ## Link of the origin
 
-Another view on the geometry of tree space can be constructed by focusing on the triples
-of trees that are related by NNI moves around a single edge. By collapsing the edge in
-question we describe a new object of one few dimensions that represents the boundary in
-tree space shared by the triplet of trees. The link of the origin has nodes that represent
-these shared faces, and the edges of this new graph correspond to fully resolved ranked
-phylogenies.
+Another view on the geometry of tree space can be constructed by focusing on the tree 
+triplets that are related by an NNI move around a single edge, and the pairs of trees
+connected by a rank move.
+By collapsing the edge around which the NNI occurs (or equating the ranks in the case of 
+a pair) we describe a new object with one fewer dimension than a fully ranked tree. These
+new objects represent the boundary in tree space shared by neighbouring trees. 
+
+The link of the origin is a graph made up of nodes that represent these shared faces, and 
+edges that correspond to each fully resolved ranked tree. An edge connects to nodes if
+the tree represented by that edge shares the faces represented by the nodes with
+neighbouring trees.
 
 <img src="images/linkOfTheOrigin-00.jpg?raw=true" width="600">
