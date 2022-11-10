@@ -28,5 +28,5 @@ move. In Figure 1 the 18 ranked trees on 4 taxa are depicted at nodes in a graph
 edges connecting neighbouring trees. Straight edges change the unranked topology, while 
 wavy edges change only the ranks of the nodes (a rank move).
 
-![Ranked NNI tree space](images/treeSpace4-00.jpg?raw=true "Figure 1")
+<img src="images/treeSpace4-00.jpg?raw=true" width="600">
 
