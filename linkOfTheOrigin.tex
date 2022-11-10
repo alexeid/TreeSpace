@@ -118,7 +118,7 @@
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bdac) at (p8) {};
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (adbc) at (p9) {};
 
-\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm, at=(p10)] (adbcB) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (adbcB)  at (p10) {};
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm, at=(p11)] (abcdB){};
 \node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm, at=(p12)] (acbdB){};
 
@@ -147,9 +147,12 @@
   \tikzset{decoration={snake,amplitude=.3mm,segment length=2mm,
                        post length=0mm,pre length=0mm}}
 
-\draw[decorate,black] (adbc) -- (adbcB) to (bcad);
-\draw[decorate,black] (bdac) -- (acbdB) to (acbd);
-\draw[decorate,black] (abcdO) -- (abcdB) to (cdab);
+\draw[black] (adbc) -- (adbcB);
+\draw[black] (adbcB) -- (bcad);
+\draw[black] (bdac) -- (acbdB);
+\draw[black] (acbdB) -- (acbd);
+\draw[black] (abcdO) -- (abcdB);
+\draw[black] (abcdB) -- (cdab);
 
 
 \end{tikzpicture}
