@@ -39,3 +39,10 @@ tree coloured yellow. White trees are the maximum distance away (which is 3 step
 taxa).
 
 <img src="images/treeSpace4-combTreeNeighbourhood-00.jpg?raw=true" width="600">
+
+Neighbourhood size varies depending on the starting tree and specifically how many rank
+moves are available. The other possible starting point is from a balanced tree and the
+shells are smaller, but 3 is still the maximum distance:
+
+<img src="images/treeSpace4-balancedTreeNeighbourhood-00.jpg?raw=true" width="600">
+
