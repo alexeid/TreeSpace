@@ -46,3 +46,13 @@ shells are smaller, but 3 is still the maximum distance:
 
 <img src="images/treeSpace4-balancedTreeNeighbourhood-00.jpg?raw=true" width="600">
 
+## Link of the origin
+
+Another view on the geometry of tree space can be constructed by focusing on the triples
+of trees that are related by NNI moves around a single edge. By collapsing the edge in
+question we describe a new object of one few dimensions that represents the boundary in
+tree space shared by the triplet of trees. The link of the origin has nodes that represent
+these shared faces, and the edges of this new graph correspond to fully resolved ranked
+phylogenies.
+
+<img src="images/linkOfTheOrigin-00.jpg?raw=true" width="600">

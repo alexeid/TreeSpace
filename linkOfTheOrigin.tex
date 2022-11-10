@@ -1,0 +1,157 @@
+\documentclass[tikz,border=5]{standalone}
+
+\usetikzlibrary{snakes}
+
+\begin{document}
+
+\tikzset{
+  pics/starInner/.style args={#1/#2/#3/#4}{
+        code={
+
+%\draw[black,fill=white] (0,0) circle (2.25);
+
+\def\d{0.5}
+
+\node at (0,1.5+\d) (root) {};
+
+\node at (-1.5,-1.5+\d) (A) {#1};
+\node at (-0.5,-1.5+\d) (B) {#2};
+\node at (0.5,-1.5+\d) (C) {#3};
+\node at (1.5,-1.5+\d) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.333] (x) coordinate[pos=0.667] (y) (root.center);
+\draw (root.center) to (D.north);
+
+\draw (y) to (B.north);
+\draw (y) to (C.north);
+
+  }}
+}
+
+\tikzset{
+  pics/starOuter/.style args={#1/#2/#3/#4}{
+        code={
+
+%\draw[black,fill=white] (0,0) circle (2.25);
+
+\def\d{0.5}
+
+\node at (0,1.5+\d) (root) {};
+
+\node at (-1.5,-1.5+\d) (A) {#1};
+\node at (-0.5,-1.5+\d) (B) {#2};
+\node at (0.5,-1.5+\d) (C) {#3};
+\node at (1.5,-1.5+\d) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.333] (x) coordinate[pos=0.667] (y) (root.center);
+\draw (root.center) to (D.north);
+
+\draw (x) to (B.north);
+\draw (root.center) to (C.north);
+
+  }}
+}
+
+\tikzset{
+  pics/balanced/.style args={#1/#2/#3/#4}{
+        code={
+%\draw[fill=orange!10] (0,0) circle (2.25);
+
+\def\d{0.5}
+
+\node at (0,1.5+\d) (root) {};
+
+\node at (-1.5,-1.5+\d) (A) {#1};
+\node at (-0.5,-1.5+\d) (B) {#2};
+\node at (0.5,-1.5+\d) (C) {#3};
+\node at (1.5,-1.5+\d) (D) {#4};
+
+\draw (A.north) to coordinate[pos=0.5] (x) (root.center);
+\draw (root.center) to coordinate[pos=0.5] (y) (D.north);
+
+\draw (x) to (B.north);
+\draw (y) to (C.north);
+
+\draw[dashed] (x) to (y);
+  }
+}}
+
+\begin{tikzpicture}[thick]
+
+\def\ir{6}
+\def\r{15}
+\def\ns{2.25}
+
+\coordinate (p0) at (\r/2,0);
+
+\draw[double,black] (p0) arc[start angle=0, end angle=60, radius=\r];
+
+\path (p0) arc[start angle=0, end angle=30, radius=\r] node[inner sep=0] (p1) {};
+\path (p0) arc[start angle=0, end angle=60, radius=\r] node[inner sep=0] (p2) {};
+
+\draw[double,black] [rotate=120] (p2) arc[start angle=0, end angle=60, radius=\r];
+
+\path [rotate=120] (p2) arc[start angle=0, end angle=30, radius=\r] node[inner sep=0] (p3) {};
+\path [rotate=120] (p2) arc[start angle=0, end angle=60, radius=\r] node[inner sep=0] (p4) {};
+
+\draw[double,black] [rotate=240] (p4) arc[start angle=0, end angle=60, radius=\r];
+
+\path [rotate=240] (p4) arc[start angle=0, end angle=30, radius=\r] node[inner sep=0] (p5) {};
+
+\node (p6) at (barycentric cs:p1=0.333,p3=0.333,p5=0.333) {};
+\node (p7) at (barycentric cs:p2=0.55,p6=0.45) {};
+\node (p8) at (barycentric cs:p4=0.55,p6=0.45) {};
+\node (p9) at (barycentric cs:p0=0.55,p6=0.45) {};
+
+\node (p10) at (barycentric cs:p1=0.45,p6=0.45,p2=0.1) {};
+\node (p11) at (barycentric cs:p3=0.45,p6=0.45,p4=0.1) {};
+\node (p12) at (barycentric cs:p5=0.45,p6=0.45,p0=0.1) {};
+
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (acdb) at (p0) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (acbd) at (p1) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (abcdI) at (p2) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bcad) at (p3) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bcda) at (p4) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (cdab) at (p5) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (abdc) at (p6) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (abcdO) at (p7) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (bdac) at (p8) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm] (adbc) at (p9) {};
+
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm, at=(p10)] (adbcB) {};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm, at=(p11)] (abcdB){};
+\node[fill=white,draw=gray,circle,inner sep=0pt,minimum size=\ns cm, at=(p12)] (acbdB){};
+
+
+\pic[scale=0.5] at (p0) {starInner=A/C/D/B};
+\pic[scale=0.5] at (p1) {starOuter=A/C/B/D};
+\pic[scale=0.5] at (p2) {starInner=A/B/C/D};
+\pic[scale=0.5] at (p3) {starOuter=B/C/A/D};
+\pic[scale=0.5] at (p4) {starInner=B/C/D/A};
+\pic[scale=0.5] at (p5) {starOuter=C/D/A/B};
+
+\pic[scale=0.5] at (p6) {starInner=A/B/D/C};
+\pic[scale=0.5] at (p7) {starOuter=A/B/C/D};
+\pic[scale=0.5] at (p8) {starOuter=B/D/A/C};
+\pic[scale=0.5] at (p9) {starOuter=A/D/B/C};
+
+\pic[scale=0.5] at (adbcB) {balanced=A/D/B/C};
+\pic[scale=0.5] at (p11) {balanced=A/B/C/D};
+\pic[scale=0.5] at (p12) {balanced=A/C/B/D};
+
+
+
+\draw[double,black] (acdb) -- (adbc) -- (abdc) -- (abcdO) -- (abcdI) ;
+\draw[double,black] (abdc) -- (bdac) -- (bcda) ;
+
+  \tikzset{decoration={snake,amplitude=.3mm,segment length=2mm,
+                       post length=0mm,pre length=0mm}}
+
+\draw[decorate,black] (adbc) -- (adbcB) to (bcad);
+\draw[decorate,black] (bdac) -- (acbdB) to (acbd);
+\draw[decorate,black] (abcdO) -- (abcdB) to (cdab);
+
+
+\end{tikzpicture}
+
+\end{document}
