@@ -30,3 +30,12 @@ wavy edges change only the ranks of the nodes (a rank move).
 
 <img src="images/treeSpace4-00.jpg?raw=true" width="600">
 
+All of the edges in this graph represent the same distance (1) in ranked NNI tree space. 
+The edges have different lengths in this depiction of the space because the graph is being
+visualised in the two-dimensional plane. This projection causes distortions. 
+
+The next figure highlights the "shells" of nodes that are 0 (yellow), 1 (orange), 2 (red) steps away from a focal 
+tree coloured yellow. White trees are the maximum distance away (which is 3 steps for 4 
+taxa).
+
+<img src="images/treeSpace4-combTreeNeighbourhood-00.jpg?raw=true" width="600">
